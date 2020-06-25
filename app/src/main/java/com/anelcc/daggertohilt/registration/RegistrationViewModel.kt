@@ -4,6 +4,7 @@ import com.anelcc.daggertohilt.user.UserManager
 import javax.inject.Inject
 
 /*
+@Inject annotation
  Dagger needs to know how to create instances for the classes
  In Kotlin, to apply an annotation to the constructor,
  you need to specifically add the keyword constructor and

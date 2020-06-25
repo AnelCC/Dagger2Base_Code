@@ -10,6 +10,7 @@ and add the @Inject annotation to UserManager 's constructor.
 Open the UserManager.kt file and replace the class definition with this one:
 
 UserManager.kt
+Now, Dagger knows how to provide instances of RegistrationViewModel and UserManager.
 */
 class UserManager @Inject constructor(private val storage: Storage) {
 
