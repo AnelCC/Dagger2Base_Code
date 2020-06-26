@@ -40,7 +40,7 @@ The project follows a typical MVVM pattern where all the complexity of the View 
 ```
 com.anelcc.name    # Root Package
 .
-├── ?                   # ?
+├── di                  # AppComponent.kt and define the interface
 ├── ?                   # ?
 │
 ├── ?                   # ?
@@ -59,3 +59,4 @@ com.anelcc.name    # Root Package
 0. Dagger basics [Read here](https://developer.android.com/training/dependency-injection/dagger-basics)
 0. Dagger 2 by google [Read here](https://docs.google.com/presentation/d/1fby5VeGU9CN8zjw4lAb2QPPsKRxx6mSwCe9q7ECNSJQ/pub?start=false&loop=false&delayms=3000&slide=id.p)
 0. MVVM pattern [Read here](https://blog.mindorks.com/mvc-mvp-mvvm-architecture-in-android)
+0. Latest available versions of Dagger [Read here](https://github.com/google/dagger/releases)

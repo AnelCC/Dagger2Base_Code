@@ -9,7 +9,7 @@ import javax.inject.Inject
 When @Inject is annotated on a class constructor,
 it's telling Dagger how to provide instances of that class.
 When it's annotated on a class field,
-it's telling Dagger that it needs to populate the field with an instance of that type.122100
+it's telling Dagger that it needs to populate the field with an instance of that type.
 */
 class RegistrationActivity : AppCompatActivity() {
 
