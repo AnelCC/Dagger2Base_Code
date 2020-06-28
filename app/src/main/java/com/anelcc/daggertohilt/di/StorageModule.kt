@@ -17,6 +17,7 @@ SharedPreferences, for example.
 abstract class StorageModule {
     // Makes Dagger provide SharedPreferencesStorage when a Storage type is requested.
     // StorageModule is abstract now because the provideStorage is abstract.
+    // Storage object is requested we need a instance of SharedPreferencesStorage
     @Binds
     abstract fun provideStorage(storage: SharedPreferencesStorage): Storage
 }

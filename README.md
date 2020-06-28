@@ -41,7 +41,8 @@ The project follows a typical MVVM pattern where all the complexity of the View 
 com.anelcc.name    # Root Package
 .
 ├── di                  # AppComponent.kt and define the interface
-├── ?                   # ?
+├── storage             # @module, @binds from Storage Interfaz that cannot be instantiated directly.
+│                       # we need to tell dagger what implementation of storage use.
 │
 ├── ?                   # ?
 │   │── ?               # ?
