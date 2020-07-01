@@ -19,6 +19,14 @@ Eg. {Module1.class, Module2.class}
 @Component(modules = [StorageModule::class]) //In this way, AppComponent can access the information that StorageModule contains.
 interface AppComponent {
 
+    // Factory to create instances of the AppComponent
+    // @BindsInstance tells Dagger that it needs to add that instance in the graph and whenever Context is required, provide that instance.
+    @Component.Factory
+    interface Factory {
+        // With @BindsInstance, the Context passed in will be available in the graph
+        fun create(@BindsInstance context: Context): AppComponent
+    }
+
     // Classes that can be injected by this Component
     // With the inject(activity: RegistrationActivity)method in the @Component interface,
     // we're telling Dagger that RegistrationActivity requests injection and that it has to provide

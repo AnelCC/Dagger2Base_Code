@@ -30,6 +30,12 @@ The app consists of 4 different flows (implemented as Activities):
 
 The project follows a typical MVVM pattern where all the complexity of the View is deferred to a ViewModel. Take a moment to familiarize yourself with the structure of the project.
 
+Dependencies are defined using the @Provides and @Binds annotations.
+
+@Binds annotation to tell Dagger which implementation it needs to use when providing an interface.
+@Modules are a way to encapsulate how to provide objects in a semantic way.
+@Component annotation  can access the information that by Modules.
+@BindsInstance. Provide an implementation when providing an interface.
 
 ### Library References
 1. Kotlin
