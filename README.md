@@ -46,15 +46,20 @@ Dependencies are defined using the @Provides and @Binds annotations.
 ```
 com.anelcc.name    # Root Package
 .
-├── di                  # Componentes and Modules. In this way, AppComponent can access the information that StorageModule contains.
-├── storage             # @module, @binds from Storage Interfaz that cannot be instantiated directly.
-│                       # we need to tell dagger what implementation of storage use.
+├── di            # Componentes and Modules. In this way, AppComponent can access the information
+│                   that StorageModule contains. @module, @binds from Storage Interfaz that cannot
+│                   be instantiated directly. we need to tell dagger what implementation of storage use.
+├── registration
+│   │
+│   │── RegistrationActivity    # RegistrationActivity can access the graph to get objects injected (or populated) by Dagger,
+│   │                             in this case RegistrationViewModel (because it is a field which is annotated with @Inject).
+│   └── RegistrationViewModel
 │
-├── ?                   # ?
-│   │── ?               # ?
-│   └── ?               # ?
+├── user          # Dagger provided instances of RegistrationViewModel and UserManager
+│   └── UserManager
 │
-└── ?
+├── MainActivity
+└── MyApplication # Instance of the AppComponent
 ```
 
 
