@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
+import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
 import javax.inject.Inject
 /*
 When @Inject is annotated on a class constructor,
@@ -21,11 +22,18 @@ class RegistrationActivity : AppCompatActivity() {
 
     // For Activities specifically, any initialization code needs to go to the onCreate method.
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Ask Dagger to inject our dependencies
+        (application as MyApplication).appComponent.inject(this) //When using Activities, inject Dagger in the Activity's onCreate method before calling super.onCreate to avoid issues with fragment restoration.
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
         // Remove following line
-        registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
+        //registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_holder, EnterDetailsFragment())
+            .commit()
     }
     /*
     How can we tell Dagger which objects need to be injected into RegistrationActivity?
