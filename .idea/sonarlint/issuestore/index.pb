@@ -17,8 +17,6 @@ Napp/src/main/java/com/anelcc/daggertohilt/registration/RegistrationActivity.kt
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 j
 :app/src/main/java/com/anelcc/daggertohilt/MyApplication.kt,8/2/822f1dda687a62891f72f36e6f5e02191b794f55
-a
-1app/src/main/res/layout/activity_registration.xml,3/3/33d54503f0d7617c3e23e16a0f8b5c214b89354e
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 }

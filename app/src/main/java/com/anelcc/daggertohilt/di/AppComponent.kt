@@ -32,4 +32,5 @@ interface AppComponent {
     // we're telling Dagger that RegistrationActivity requests injection and that it has to provide
     // the dependencies which are annotated with @Inject to RegistrationViewModel.
     fun inject(activity: RegistrationActivity)
+    fun inject(activity: MainActivity)
 }
