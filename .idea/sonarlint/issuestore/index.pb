@@ -1,0 +1,27 @@
+
+i
+9app/src/main/java/com/anelcc/daggertohilt/MainActivity.kt,e/e/ee39098d2a8ab31db69b0fd3499efedaeddfd7e5
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+l
+<app/src/main/java/com/anelcc/daggertohilt/storage/Storage.kt,c/5/c56f3494bd4f0a092d094281568e9a4ecf090051
+
+Oapp/src/main/java/com/anelcc/daggertohilt/registration/RegistrationViewModel.kt,8/1/81a8de3336bcf7e32258352c653038990c7aeb6b
+l
+<app/src/main/java/com/anelcc/daggertohilt/di/AppComponent.kt,7/e/7e12dfb884ebef8f64633588288a0810e4a6a99b
+m
+=app/src/main/java/com/anelcc/daggertohilt/user/UserManager.kt,6/f/6fe3e5ef18b7544903ce2a941c1472a48a410dfc
+~
+Napp/src/main/java/com/anelcc/daggertohilt/registration/RegistrationActivity.kt,f/4/f4c5c103f852c3b8c14516bd172e7d301331dffc
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+j
+:app/src/main/java/com/anelcc/daggertohilt/MyApplication.kt,8/2/822f1dda687a62891f72f36e6f5e02191b794f55
+a
+1app/src/main/res/layout/activity_registration.xml,3/3/33d54503f0d7617c3e23e16a0f8b5c214b89354e
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+}
+Mapp/src/main/java/com/anelcc/daggertohilt/storage/SharedPreferencesStorage.kt,a/f/afd654c2269f3a82c64d02c64a863399e2fa7cc0
+m
+=app/src/main/java/com/anelcc/daggertohilt/di/StorageModule.kt,b/7/b7afd4248d5963b7069475a1a781571a93298437

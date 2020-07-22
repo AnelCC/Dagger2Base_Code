@@ -4,10 +4,7 @@ import com.anelcc.daggertohilt.storage.Storage
 import javax.inject.Inject
 
 /*
-Dagger doesn't know how to create types of UserManager yet. Follow the same process,
-and add the @Inject annotation to UserManager 's constructor.
-
-Open the UserManager.kt file and replace the class definition with this one:
+Dagger doesn't know how to create types of UserManager yet. Added the @Inject annotation to UserManager 's constructor.
 
 UserManager.kt
 Now, Dagger knows how to provide instances of RegistrationViewModel and UserManager.

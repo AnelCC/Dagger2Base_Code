@@ -2,6 +2,7 @@ package com.anelcc.daggertohilt
 
 import android.app.Application
 import com.anelcc.daggertohilt.di.AppComponent
+import com.anelcc.daggertohilt.di.DaggerAppComponent
 import com.anelcc.daggertohilt.storage.SharedPreferencesStorage
 import com.anelcc.daggertohilt.user.UserManager
 

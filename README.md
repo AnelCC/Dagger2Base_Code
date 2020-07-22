@@ -30,6 +30,12 @@ The app consists of 4 different flows (implemented as Activities):
 
 The project follows a typical MVVM pattern where all the complexity of the View is deferred to a ViewModel. Take a moment to familiarize yourself with the structure of the project.
 
+Dependencies are defined using the @Provides and @Binds annotations.
+
+@Binds annotation to tell Dagger which implementation it needs to use when providing an interface.
+@Modules are a way to encapsulate how to provide objects in a semantic way.
+@Component annotation  can access the information that by Modules.
+@BindsInstance. Provide an implementation when providing an interface.
 
 ### Library References
 1. Kotlin
@@ -40,14 +46,20 @@ The project follows a typical MVVM pattern where all the complexity of the View 
 ```
 com.anelcc.name    # Root Package
 .
-├── ?                   # ?
-├── ?                   # ?
+├── di            # Componentes and Modules. In this way, AppComponent can access the information
+│                   that StorageModule contains. @module, @binds from Storage Interfaz that cannot
+│                   be instantiated directly. we need to tell dagger what implementation of storage use.
+├── registration
+│   │
+│   │── RegistrationActivity    # RegistrationActivity can access the graph to get objects injected (or populated) by Dagger,
+│   │                             in this case RegistrationViewModel (because it is a field which is annotated with @Inject).
+│   └── RegistrationViewModel
 │
-├── ?                   # ?
-│   │── ?               # ?
-│   └── ?               # ?
+├── user          # Dagger provided instances of RegistrationViewModel and UserManager
+│   └── UserManager
 │
-└── ?
+├── MainActivity
+└── MyApplication # Instance of the AppComponent
 ```
 
 
@@ -59,3 +71,4 @@ com.anelcc.name    # Root Package
 0. Dagger basics [Read here](https://developer.android.com/training/dependency-injection/dagger-basics)
 0. Dagger 2 by google [Read here](https://docs.google.com/presentation/d/1fby5VeGU9CN8zjw4lAb2QPPsKRxx6mSwCe9q7ECNSJQ/pub?start=false&loop=false&delayms=3000&slide=id.p)
 0. MVVM pattern [Read here](https://blog.mindorks.com/mvc-mvp-mvvm-architecture-in-android)
+0. Latest available versions of Dagger [Read here](https://github.com/google/dagger/releases)
