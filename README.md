@@ -55,6 +55,15 @@ com.anelcc.name    # Root Package
 │   │                             in this case RegistrationViewModel (because it is a field which is annotated with @Inject).
 │   └── RegistrationViewModel
 │
+├── login          # Views that can be injected by the Component
+│   │              # In this case LoginActivity & LoginViewModel
+│   │── LoginActivity
+│   └── LoginViewModel
+│
+├── main           # Views that can be injected by the Component
+│   │              # In this case MainViewModel
+│   └── MainViewModel
+│
 ├── user          # Dagger provided instances of RegistrationViewModel and UserManager
 │   └── UserManager
 │
