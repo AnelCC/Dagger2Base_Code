@@ -12,18 +12,26 @@ import androidx.lifecycle.Observer
 import com.anelcc.daggertohilt.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
+import com.anelcc.daggertohilt.registration.RegistrationActivity
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    // @Inject annotated fields will be provided by Dagger
+    @Inject
+    lateinit var loginViewModel: LoginViewModel
+
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Creates an instance of Login component by grabbing the factory from the app graph
+        // and injects this activity to that Component
+        (application as MyApplication).appComponent.loginComponent().create().inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Creates ViewModel and listens for the loginState LiveData
-        loginViewModel = LoginViewModel((application as MyApplication).userManager)
         loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
             when (state) {
                 is LoginSuccess -> {
@@ -48,6 +56,14 @@ class LoginActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.login).setOnClickListener {
             loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
+        }
+        findViewById<Button>(R.id.unregister).setOnClickListener {
+            loginViewModel.unregister()
+            val intent = Intent(this, RegistrationActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                    Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
     }
 }
