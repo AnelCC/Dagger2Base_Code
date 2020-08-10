@@ -18,7 +18,7 @@ In the codelab, we will see how to use Dagger to automate this process and gener
 Dagger will be in charge of creating the application graph for us. We'll also use Dagger to perform field injection in our Activities instead of creating the dependencies by hand.
 
 ### Android
-This repository contains simple COVID19 data monitoring by country. Develop in android over MVVM, Live Data, Kotlin, RxBinding, etc.
+This repository contains Develop in android over MVVM, Live Data, Kotlin, etc.
 
 ### Preview 🎉
 The app consists of 4 different flows (implemented as Activities):
