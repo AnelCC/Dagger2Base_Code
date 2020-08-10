@@ -2,7 +2,7 @@ package com.anelcc.daggertohilt.registration
 
 import com.anelcc.daggertohilt.di.ActivityScope
 import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
-import com.anelcc.daggertohilt.termsandconditions.TermsAndConditionsFragment
+import com.anelcc.daggertohilt.registration.termsandconditions.TermsAndConditionsFragment
 import dagger.Subcomponent
 
 
