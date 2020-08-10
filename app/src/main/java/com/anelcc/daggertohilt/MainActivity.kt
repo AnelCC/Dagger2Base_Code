@@ -10,6 +10,7 @@ import com.anelcc.daggertohilt.main.MainViewModel
 import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.settings.SettingsActivity
 import com.anelcc.daggertohilt.user.UserManager
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {

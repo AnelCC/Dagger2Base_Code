@@ -1,4 +1,8 @@
 package com.anelcc.daggertohilt.di
 
-interface ActivityScope {
-}
+import javax.inject.Scope
+
+@Scope
+@MustBeDocumented
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class ActivityScope

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
+import com.anelcc.daggertohilt.termsandconditions.TermsAndConditionsFragment
 import javax.inject.Inject
 /*
 When @Inject is annotated on a class constructor,
@@ -40,4 +41,14 @@ class RegistrationActivity : AppCompatActivity() {
     We need to create the Dagger graph (or application graph)
     and use it to inject objects into the Activity.
     */
+
+    /**
+     * Callback from EnterDetailsFragment when username and password has been entered
+     */
+    fun onDetailsEntered() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_holder, TermsAndConditionsFragment())
+            .addToBackStack(TermsAndConditionsFragment::class.java.simpleName)
+            .commit()
+    }
 }
