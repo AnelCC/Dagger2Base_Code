@@ -21,12 +21,20 @@ via our @Component annotation we also need to add the another Module.class to th
 Eg. {Module1.class, Module2.class}
 */
 
+
+// Definition of a Dagger component that adds info from the StorageModule to the graph
+// Sometimes, you might want to provide the same instance of a dependency in a Component
+// This is what is also called "to scope a type to the Component's lifecycle".
+// Scoping a type to a Component means that the same instance of that type will be used every time the type needs to be provided.
+//For AppComponent, we can use the @Singleton scope annotation that is the only scope annotation that comes with
+
 // Scope annotation that the AppComponent uses
 // Classes annotated with @Singleton will have a unique instance in this Component
 @Singleton
 // Definition of a Dagger component that adds info from the different modules to the graph
 //In this way, AppComponent can access the information that StorageModule or AppSubcomponents contains.
 @Component(modules = [StorageModule::class, AppSubcomponents::class])
+
 interface AppComponent {
 
     // Factory to create instances of the AppComponent
