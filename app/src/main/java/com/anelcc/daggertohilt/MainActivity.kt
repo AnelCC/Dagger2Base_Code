@@ -10,22 +10,39 @@ import com.anelcc.daggertohilt.main.MainViewModel
 import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.settings.SettingsActivity
 import com.anelcc.daggertohilt.user.UserManager
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var userManager: UserManager
-    private lateinit var mainViewModel: MainViewModel
+    // @Inject annotated fields will be provided by Dagger
+    @Inject
+    lateinit var userManager: UserManager
+
+    @Inject
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        handleUserSession {
-            setContentView(R.layout.activity_main)
+        (application as MyApplication).appComponent.inject(this)
 
-            mainViewModel = MainViewModel(userManager.userDataRepository!!)
+        super.onCreate(savedInstanceState)
+
+        if (!userManager.isUserLoggedIn()) {
+            if (!userManager.isUserRegistered()) {
+                startActivity(Intent(this, RegistrationActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+        } else {
+            setContentView(R.layout.activity_main)
             setupViews()
         }
     }
 
+    /**
+     * Updating unread notifications onResume because they can get updated on SettingsActivity
+     */
     /**
      * Updating unread notifications onResume because they can get updated on SettingsActivity
      */
@@ -36,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         findViewById<TextView>(R.id.hello).text = mainViewModel.welcomeText
-        findViewById<Button>(R.id.logout).setOnClickListener {
+        findViewById<Button>(R.id.settings).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
     }

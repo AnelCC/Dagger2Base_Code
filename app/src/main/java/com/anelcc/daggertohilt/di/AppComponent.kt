@@ -2,7 +2,11 @@ package com.anelcc.daggertohilt.di
 
 import android.content.Context
 import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.login.LoginComponent
 import com.anelcc.daggertohilt.registration.RegistrationActivity
+import com.anelcc.daggertohilt.registration.RegistrationComponent
+import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
+import com.anelcc.daggertohilt.registration.termsandconditions.TermsAndConditionsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -17,13 +21,20 @@ via our @Component annotation we also need to add the another Module.class to th
 Eg. {Module1.class, Module2.class}
 */
 
+
 // Definition of a Dagger component that adds info from the StorageModule to the graph
 // Sometimes, you might want to provide the same instance of a dependency in a Component
 // This is what is also called "to scope a type to the Component's lifecycle".
 // Scoping a type to a Component means that the same instance of that type will be used every time the type needs to be provided.
 //For AppComponent, we can use the @Singleton scope annotation that is the only scope annotation that comes with
+
+// Scope annotation that the AppComponent uses
+// Classes annotated with @Singleton will have a unique instance in this Component
 @Singleton
-@Component(modules = [StorageModule::class]) //In this way, AppComponent can access the information that StorageModule contains.
+// Definition of a Dagger component that adds info from the different modules to the graph
+//In this way, AppComponent can access the information that StorageModule or AppSubcomponents contains.
+@Component(modules = [StorageModule::class, AppSubcomponents::class])
+
 interface AppComponent {
 
     // Factory to create instances of the AppComponent
@@ -34,10 +45,23 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+
+    // Types that can be retrieved from the graph
+    fun registrationComponent(): RegistrationComponent.Factory
+    fun loginComponent(): LoginComponent.Factory
+
     // Classes that can be injected by this Component
     // With the inject(activity: RegistrationActivity)method in the @Component interface,
     // we're telling Dagger that RegistrationActivity requests injection and that it has to provide
     // the dependencies which are annotated with @Inject to RegistrationViewModel.
-    fun inject(activity: RegistrationActivity)
+    //fun inject(activity: RegistrationActivity)
     fun inject(activity: MainActivity)
+
+   /* //Which fields do we want Dagger to provide?
+    // In EnterDetailsFragment,
+    // we want Dagger to populate both ViewModels.
+    // We do that by annotating the fields with
+    // @Inject and removing the private visibility modifier.
+    fun inject(fragment: EnterDetailsFragment)
+    fun inject(fragment: TermsAndConditionsFragment)*/
 }

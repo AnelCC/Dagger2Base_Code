@@ -56,4 +56,11 @@ class UserManager @Inject constructor(private val storage: Storage) {
     private fun userJustLoggedIn() {
         userDataRepository = UserDataRepository(this)
     }
+
+    fun unregister() {
+        val username = storage.getString(REGISTERED_USER)
+        storage.setString(REGISTERED_USER, "")
+        storage.setString("$username$PASSWORD_SUFFIX", "")
+        logout()
+    }
 }

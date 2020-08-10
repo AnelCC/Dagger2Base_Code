@@ -1,5 +1,6 @@
 package com.anelcc.daggertohilt.registration
 
+import com.anelcc.daggertohilt.di.ActivityScope
 import com.anelcc.daggertohilt.user.UserManager
 import javax.inject.Inject
 
@@ -15,7 +16,26 @@ With the @Inject annotation, Dagger knows:
 2.- RegistrationViewModel has UserManager as dependency
 since the constructor takes an instance of UserManager as an argument.
  */
-
+@ActivityScope
 class RegistrationViewModel @Inject constructor(val userManager: UserManager) {
+    private var username: String? = null
+    private var password: String? = null
+    private var acceptedTCs: Boolean? = null
 
+    fun updateUserData(username: String, password: String) {
+        this.username = username
+        this.password = password
+    }
+
+    fun acceptTCs() {
+        acceptedTCs = true
+    }
+
+    fun registerUser() {
+        assert(username != null)
+        assert(password != null)
+        assert(acceptedTCs == true)
+
+        userManager.registerUser(username!!, password!!)
+    }
 }
