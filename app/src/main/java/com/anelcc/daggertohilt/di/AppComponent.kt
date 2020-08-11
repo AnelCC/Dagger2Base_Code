@@ -7,6 +7,7 @@ import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.registration.RegistrationComponent
 import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
 import com.anelcc.daggertohilt.registration.termsandconditions.TermsAndConditionsFragment
+import com.anelcc.daggertohilt.user.UserManager
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -55,7 +56,7 @@ interface AppComponent {
     // we're telling Dagger that RegistrationActivity requests injection and that it has to provide
     // the dependencies which are annotated with @Inject to RegistrationViewModel.
     //fun inject(activity: RegistrationActivity)
-    fun inject(activity: MainActivity)
+    //fun inject(activity: MainActivity)
 
    /* //Which fields do we want Dagger to provide?
     // In EnterDetailsFragment,
@@ -64,4 +65,5 @@ interface AppComponent {
     // @Inject and removing the private visibility modifier.
     fun inject(fragment: EnterDetailsFragment)
     fun inject(fragment: TermsAndConditionsFragment)*/
+   fun userManager(): UserManager
 }
