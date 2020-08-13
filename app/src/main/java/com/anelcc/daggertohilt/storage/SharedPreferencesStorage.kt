@@ -1,12 +1,13 @@
 package com.anelcc.daggertohilt.storage
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-
-// @Inject tells Dagger how to provide instances of this type
-// Storage object is requested it should create an instance of SharedPreferencesStorage
-// We do by annotating the constructor of SharedPreferencesStorage with @Inject.
-class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {
+//In this case, SharedPreferencesStorage has Context as a dependency.
+// In order to tell Hilt to inject the context, open SharedPreferencesStorage.kt.
+// SharedPreferences requires application's Context, so add @ApplicationContext
+// annotation to the context parameter.
+class SharedPreferencesStorage @Inject constructor(@ApplicationContext context: Context) : Storage {
     private val sharedPreferences = context.getSharedPreferences("Dagger", Context.MODE_PRIVATE)
 
     override fun setString(key: String, value: String) {

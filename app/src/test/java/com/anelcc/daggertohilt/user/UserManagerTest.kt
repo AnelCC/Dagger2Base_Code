@@ -15,12 +15,12 @@ class UserManagerTest {
 
     @Before
     fun setup() {
-        val userComponentFactory = Mockito.mock(UserComponent.Factory::class.java)
+       /* val userComponentFactory = Mockito.mock(UserComponent.Factory::class.java)
         val userComponent = Mockito.mock(UserComponent::class.java)
-        `when`(userComponentFactory.create()).thenReturn(userComponent)
+        `when`(userComponentFactory.create()).thenReturn(userComponent)*/
 
         storage = SharedPreferencesStorageTest()
-        userManager = UserManager(storage, userComponentFactory)
+        userManager = UserManager(storage, UserDataRepository())
     }
 
     @Test

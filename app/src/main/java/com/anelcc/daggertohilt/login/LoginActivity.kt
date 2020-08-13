@@ -9,13 +9,32 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.RegistrationActivity
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+    //If you want a content provider to use Hilt to get some dependencies,
+    // you need to define an interface that is annotated with @EntryPoint
+    // for each binding type that you want and include qualifiers.
+    // By using entry points you can keep the app working while migrating every Dagger component.
+
+    //Since Hilt will generate the Dagger related code, all you need to do is some cleanup.
+    // Delete the LoginEntryPoint interface.
+    /*@InstallIn(ApplicationComponent::class)
+    @EntryPoint
+    interface LoginEntryPoint {
+        fun loginComponent(): RegistrationComponent.Factory
+    }*/
+
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
@@ -27,10 +46,13 @@ class LoginActivity : AppCompatActivity() {
 
         // Creates an instance of Login component by grabbing the factory from the app graph
         // and injects this activity to that Component
-        (application as MyApplication).appComponent.loginComponent().create().inject(this)
+        //(application as MyApplication).appComponent.loginComponent().create().inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+       /* val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
+        entryPoint.loginComponent().create().inject(this)*/
 
         loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
             when (state) {
@@ -52,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
         usernameEditText.setText(loginViewModel.getUsername())
 
         val passwordEditText = findViewById<EditText>(R.id.password)
-       // passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
+        //passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
 
         findViewById<Button>(R.id.login).setOnClickListener {
             loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())

@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.registration.RegistrationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 import javax.inject.Inject
 
@@ -21,18 +22,8 @@ import javax.inject.Inject
 *
 * @Inject annotated fields will be provided by Dagger
 */
+@AndroidEntryPoint
 class EnterDetailsFragment : Fragment() {
-    /**
-     * RegistrationViewModel is used to set the username and password information (attached to
-     * Activity's lifecycle and shared between different fragments)
-     * EnterDetailsViewModel is used to validate the user input (attached to this
-     * Fragment's lifecycle)
-     *
-     * They could get combined but for the sake of the codelab, we're separating them so we have
-     * different ViewModels with different lifecycles.
-     *
-     * @Inject annotated fields will be provided by Dagger
-     */
     @Inject
     lateinit var registrationViewModel: RegistrationViewModel
 
@@ -43,20 +34,18 @@ class EnterDetailsFragment : Fragment() {
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
 
-    override fun onAttach(context: Context) {
+   /* override fun onAttach(context: Context) {
         super.onAttach(context)
 
         // Grabs the registrationComponent from the Activity and injects this Fragment
         (activity as RegistrationActivity).registrationComponent.inject(this)
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-       /* //But we also have to remove the manual instantiations we have in the code. Remove the following lines:
-        registrationViewModel = (activity as RegistrationActivity).registrationViewModel
-        enterDetailsViewModel = EnterDetailsViewModel()*/
-
+*/
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
 
         enterDetailsViewModel.enterDetailsState.observe(this,
@@ -85,12 +74,10 @@ class EnterDetailsFragment : Fragment() {
         errorTextView = view.findViewById(R.id.error)
 
         usernameEditText = view.findViewById(R.id.username)
-        /*usernameEditText.doOnTextChanged { _, _, _, _ ->
-            errorTextView.visibility = View.INVISIBLE
-        }*/
+        //usernameEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
 
         passwordEditText = view.findViewById(R.id.password)
-       // passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
+        //passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
 
         view.findViewById<Button>(R.id.next).setOnClickListener {
             val username = usernameEditText.text.toString()

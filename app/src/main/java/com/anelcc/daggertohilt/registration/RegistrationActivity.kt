@@ -3,22 +3,29 @@ package com.anelcc.daggertohilt.registration
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
 import com.anelcc.daggertohilt.registration.termsandconditions.TermsAndConditionsFragment
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
-/*
-When @Inject is annotated on a class constructor,
-it's telling Dagger how to provide instances of that class.
-When it's annotated on a class field,
-it's telling Dagger that it needs to populate the field with an instance of that type.
-*/
-class RegistrationActivity : AppCompatActivity() {
 
-    // Stores an instance of RegistrationComponent so that its Fragments can access it
-    lateinit var registrationComponent: RegistrationComponent
+@AndroidEntryPoint
+class RegistrationActivity : AppCompatActivity() {
+   /* @InstallIn(ApplicationComponent::class)
+    //If you want a content provider to use Hilt to get some dependencies,
+    // you need to define an interface that is annotated with @EntryPoint
+    // for each binding type that you want and include qualifiers.
+    // By using entry points you can keep the app working while migrating every Dagger component.
+    @EntryPoint
+    interface RegistrationEntryPoint {
+        fun registrationComponent(): RegistrationComponent.Factory
+    }*/
 
     // We cannot use the @Inject annotation in the constructor of a View class.
     // Instead, we have to use field injection.
@@ -26,35 +33,19 @@ class RegistrationActivity : AppCompatActivity() {
     @Inject
     lateinit var registrationViewModel: RegistrationViewModel
 
-    // For Activities specifically, any initialization code needs to go to the onCreate method.
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Ask Dagger to inject our dependencies
-        //(application as MyApplication).appComponent.inject(this)
-        //When using Activities, inject Dagger in the Activity's onCreate method before calling
-        // super.onCreate to avoid issues with fragment restoration.
-
         // Creates an instance of Registration component by grabbing the factory from the app graph
-        registrationComponent = (application as MyApplication).appComponent
-            .registrationComponent().create()
+        /*val entryPoint = EntryPointAccessors.fromApplication(applicationContext, RegistrationEntryPoint::class.java)
+        registrationComponent = entryPoint.registrationComponent().create()*/
 
-        // Injects this activity to the just created Registration component
-        registrationComponent.inject(this)
-
+        // registrationComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-
-        // Remove following line
-        //registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, EnterDetailsFragment())
             .commit()
     }
-    /*
-    How can we tell Dagger which objects need to be injected into RegistrationActivity?
-    We need to create the Dagger graph (or application graph)
-    and use it to inject objects into the Activity.
-    */
 
     /**
      * Callback from EnterDetailsFragment when username and password has been entered

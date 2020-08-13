@@ -7,22 +7,23 @@ import android.widget.Button
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.login.LoginActivity
+import com.anelcc.daggertohilt.main.MainActivity
+import com.anelcc.daggertohilt.user.UserManager
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
+    @Inject
+    lateinit var userManager: UserManager
 
     private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val userManager = (application as MyApplication).appComponent.userManager()
-        userManager.userComponent!!.inject(this)
-        // Gets the userManager from the application graph to obtain the UserComponent
-        // and gets this Activity injected
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-       /* val userManager = (application as MyApplication).userManager
-        settingsViewModel = SettingsViewModel(userManager.userDataRepository!!, userManager)*/
 
         setupViews()
     }
