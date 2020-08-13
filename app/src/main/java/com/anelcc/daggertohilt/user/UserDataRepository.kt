@@ -12,7 +12,7 @@ import kotlin.random.Random
  */
 //@LoggedUserScope
 @Singleton
-class UserDataRepository @Inject constructor(private val userManager: UserManager) {
+class UserDataRepository @Inject constructor() {
 
     var username: String? = null
         private set
@@ -27,10 +27,9 @@ class UserDataRepository @Inject constructor(private val userManager: UserManage
     fun refreshUnreadNotifications() {
         unreadNotifications = randomInt()
     }
-
     fun initData(username: String) {
         this.username = username
-        this.unreadNotifications = randomInt()
+        unreadNotifications = randomInt()
     }
 
     fun cleanUp() {
