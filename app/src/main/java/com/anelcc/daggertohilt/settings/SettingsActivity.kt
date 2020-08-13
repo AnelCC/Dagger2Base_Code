@@ -8,9 +8,11 @@ import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.login.LoginActivity
 import com.anelcc.daggertohilt.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var settingsViewModel: SettingsViewModel
@@ -18,9 +20,9 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //val userManager = (application as MyApplication).appComponent.userManager()
         //userManager.userComponent!!.inject(this)
-        val entryPoint = EntryPointAccessors
+       /* val entryPoint = EntryPointAccessors
             .fromApplication(applicationContext, MainActivity.UserManagerEntryPoint::class.java)
-        val userManager = entryPoint.userManager()
+        val userManager = entryPoint.userManager()*/
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)

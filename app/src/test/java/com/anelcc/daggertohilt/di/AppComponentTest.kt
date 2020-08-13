@@ -12,4 +12,4 @@ import javax.inject.Singleton
 @Singleton
 // Includes TestStorageModule that overrides objects provided in StorageModule
 @Component(modules = [StorageModuleTest::class, AppSubcomponents::class])
-interface AppComponentTest : AppComponent
+//interface AppComponentTest : AppComponent

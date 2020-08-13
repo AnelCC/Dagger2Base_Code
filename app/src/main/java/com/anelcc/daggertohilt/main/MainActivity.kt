@@ -13,21 +13,25 @@ import com.anelcc.daggertohilt.settings.SettingsActivity
 import com.anelcc.daggertohilt.user.UserManager
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @InstallIn(ApplicationComponent::class)
+    /*@InstallIn(ApplicationComponent::class)
     @EntryPoint
     interface UserManagerEntryPoint {
         fun userManager(): UserManager
-    }
+    }*/
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
     lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var userManager: UserManager
 
     /**
      * If the User is not registered, RegistrationActivity will be launched,
@@ -36,8 +40,8 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
-        val userManager = entryPoint.userManager()
+       /* val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
+        val userManager = entryPoint.userManager()*/
 
         // Grabs instance of UserManager from the application graph
        // val userManager = (application as MyApplication).appComponent.userManager()
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             // If the MainActivity needs to be displayed, we get the UserComponent from the
             // application graph and gets this Activity injected
-            userManager.userComponent!!.inject(this)
+           // userManager.userComponent!!.inject(this)
             setupViews()
         }
     }

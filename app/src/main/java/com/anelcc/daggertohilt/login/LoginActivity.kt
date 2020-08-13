@@ -13,7 +13,6 @@ import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.RegistrationActivity
-import com.anelcc.daggertohilt.registration.RegistrationComponent
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,16 +44,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-        /* val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
-         entryPoint.loginComponent().create().inject(this)*/
-
         // Creates an instance of Login component by grabbing the factory from the app graph
         // and injects this activity to that Component
-        (application as MyApplication).appComponent.loginComponent().create().inject(this)
+        //(application as MyApplication).appComponent.loginComponent().create().inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+       /* val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
+        entryPoint.loginComponent().create().inject(this)*/
 
         loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
             when (state) {

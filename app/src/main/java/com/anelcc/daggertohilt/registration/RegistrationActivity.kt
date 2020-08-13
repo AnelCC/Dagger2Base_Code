@@ -10,12 +10,14 @@ import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment
 import com.anelcc.daggertohilt.registration.termsandconditions.TermsAndConditionsFragment
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
-    @InstallIn(ApplicationComponent::class)
+   /* @InstallIn(ApplicationComponent::class)
     //If you want a content provider to use Hilt to get some dependencies,
     // you need to define an interface that is annotated with @EntryPoint
     // for each binding type that you want and include qualifiers.
@@ -23,10 +25,7 @@ class RegistrationActivity : AppCompatActivity() {
     @EntryPoint
     interface RegistrationEntryPoint {
         fun registrationComponent(): RegistrationComponent.Factory
-    }
-
-    // Stores an instance of RegistrationComponent so that its Fragments can access it
-    lateinit var registrationComponent: RegistrationComponent
+    }*/
 
     // We cannot use the @Inject annotation in the constructor of a View class.
     // Instead, we have to use field injection.
@@ -35,16 +34,17 @@ class RegistrationActivity : AppCompatActivity() {
     lateinit var registrationViewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Creates an instance of Registration component by grabbing the factory from the app graph
+        /*val entryPoint = EntryPointAccessors.fromApplication(applicationContext, RegistrationEntryPoint::class.java)
+        registrationComponent = entryPoint.registrationComponent().create()*/
+
+        // registrationComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, EnterDetailsFragment())
             .commit()
-
-        // Creates an instance of Registration component by grabbing the factory from the app graph
-        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, RegistrationEntryPoint::class.java)
-        registrationComponent = entryPoint.registrationComponent().create()
     }
 
     /**
