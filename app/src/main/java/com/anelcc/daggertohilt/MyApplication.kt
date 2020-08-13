@@ -3,8 +3,6 @@ package com.anelcc.daggertohilt
 import android.app.Application
 import com.anelcc.daggertohilt.di.AppComponent
 import com.anelcc.daggertohilt.di.DaggerAppComponent
-import com.anelcc.daggertohilt.storage.SharedPreferencesStorage
-import com.anelcc.daggertohilt.user.UserManager
 
 open class MyApplication : Application() {
 
@@ -20,7 +18,7 @@ open class MyApplication : Application() {
         DaggerAppComponent.factory().create(applicationContext)
     }
 
-    open val userManager by lazy {
+   /* open val userManager by lazy {
         UserManager(SharedPreferencesStorage(this))
-    }
+    }*/
 }
