@@ -16,13 +16,9 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val userManager = (application as MyApplication).appComponent.userManager()
         userManager.userComponent!!.inject(this)
-        // Gets the userManager from the application graph to obtain the UserComponent
-        // and gets this Activity injected
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-       /* val userManager = (application as MyApplication).userManager
-        settingsViewModel = SettingsViewModel(userManager.userDataRepository!!, userManager)*/
 
         setupViews()
     }

@@ -3,7 +3,7 @@ package com.anelcc.daggertohilt.registration
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.enterdetail.EnterDetailsFragment

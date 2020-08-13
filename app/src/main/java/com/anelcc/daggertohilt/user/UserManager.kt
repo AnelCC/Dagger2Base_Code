@@ -17,17 +17,12 @@ private const val PASSWORD_SUFFIX = "password"
 // Now, classes annotated with @Singleton will be scoped to AppComponent.
 // Let's annotate UserManager to have a unique instance of it in the application graph.
 @Singleton
-class UserManager @Inject constructor(private val storage: Storage,
+class UserManager @Inject constructor(
+    private val storage: Storage,
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
     // it needs to know how to create instances of it
     private val userComponentFactory: UserComponent.Factory
 ) {
-   /* *//**
-     *  UserDataRepository is specific to a logged in user. This determines if the user
-     *  is logged in or not, when the user logs in, a new instance will be created.
-     *  When the user logs out, this will be null.
-     *//*
-    var userDataRepository: UserDataRepository? = null*/
 
     /**
      *  UserComponent is specific to a logged in user. Holds an instance of UserComponent.
@@ -35,11 +30,10 @@ class UserManager @Inject constructor(private val storage: Storage,
      *  a new Component will be created. When the user logs out, this will be null.
      */
     var userComponent: UserComponent? = null
+        private set
 
     val username: String
         get() = storage.getString(REGISTERED_USER)
-
-   // fun isUserLoggedIn() = userDataRepository != null
 
     fun isUserLoggedIn() = userComponent != null
 
@@ -63,15 +57,8 @@ class UserManager @Inject constructor(private val storage: Storage,
     }
 
     fun logout() {
-        //userDataRepository = null
         // When the user logs out, we remove the instance of UserComponent from memory
         userComponent = null
-    }
-
-    private fun userJustLoggedIn() {
-        //userDataRepository = UserDataRepository(this)
-        // When the user logs in, we create a new instance of UserComponent
-        userComponent = userComponentFactory.create()
     }
 
     fun unregister() {
@@ -79,5 +66,10 @@ class UserManager @Inject constructor(private val storage: Storage,
         storage.setString(REGISTERED_USER, "")
         storage.setString("$username$PASSWORD_SUFFIX", "")
         logout()
+    }
+
+    private fun userJustLoggedIn() {
+        // When the user logs in, we create a new instance of UserComponent
+        userComponent = userComponentFactory.create()
     }
 }

@@ -1,6 +1,6 @@
 package com.anelcc.daggertohilt.user
 
-import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.settings.SettingsActivity
 import dagger.Subcomponent
 

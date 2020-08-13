@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import com.anelcc.daggertohilt.MainActivity
+import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.RegistrationActivity
@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         usernameEditText.setText(loginViewModel.getUsername())
 
         val passwordEditText = findViewById<EditText>(R.id.password)
-       // passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
+        //passwordEditText.doOnTextChanged { _, _, _, _ -> errorTextView.visibility = View.INVISIBLE }
 
         findViewById<Button>(R.id.login).setOnClickListener {
             loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
