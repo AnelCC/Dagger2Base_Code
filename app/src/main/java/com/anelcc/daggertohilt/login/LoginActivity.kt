@@ -16,20 +16,25 @@ import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.registration.RegistrationComponent
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     //If you want a content provider to use Hilt to get some dependencies,
     // you need to define an interface that is annotated with @EntryPoint
     // for each binding type that you want and include qualifiers.
     // By using entry points you can keep the app working while migrating every Dagger component.
-    @InstallIn(ApplicationComponent::class)
+
+    //Since Hilt will generate the Dagger related code, all you need to do is some cleanup.
+    // Delete the LoginEntryPoint interface.
+    /*@InstallIn(ApplicationComponent::class)
     @EntryPoint
     interface LoginEntryPoint {
         fun loginComponent(): RegistrationComponent.Factory
-    }
+    }*/
 
 
     // @Inject annotated fields will be provided by Dagger
@@ -40,15 +45,16 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
+        /* val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
+         entryPoint.loginComponent().create().inject(this)*/
+
         // Creates an instance of Login component by grabbing the factory from the app graph
         // and injects this activity to that Component
         (application as MyApplication).appComponent.loginComponent().create().inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
-        entryPoint.loginComponent().create().inject(this)
 
         loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
             when (state) {

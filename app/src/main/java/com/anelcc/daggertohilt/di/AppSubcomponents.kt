@@ -12,6 +12,7 @@ import dagger.hilt.android.components.ApplicationComponent
 // you want the bindings to be generated in ApplicationComponent.
 @InstallIn(ApplicationComponent::class)
 // This module tells a Component which are its subcomponents
+// This is all you need to migrate LoginActivity to use Hilt.
 @Module(
     subcomponents = [
         RegistrationComponent::class,
