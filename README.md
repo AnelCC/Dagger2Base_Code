@@ -37,6 +37,13 @@ Dependencies are defined using the @Provides and @Binds annotations.
 @Component annotation  can access the information that by Modules.
 @BindsInstance. Provide an implementation when providing an interface.
 
+How to create an Application graph using Dagger @Component annotation.
+How to add information to the graph using @Inject, @Module, @Binds and @BindsInstance annotations.
+How to create flow containers using @Subcomponent.
+How to reuse instances of objects in different containers using Scopes.
+Dagger Qualifiers and @Provides annotation.
+How to test your application that uses Dagger with unit and instrumentation tests.
+
 ### Library References
 1. Kotlin
 2. Dagger 2

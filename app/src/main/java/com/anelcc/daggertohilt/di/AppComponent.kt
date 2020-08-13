@@ -37,7 +37,6 @@ Eg. {Module1.class, Module2.class}
 @Component(modules = [StorageModule::class, AppSubcomponents::class])
 
 interface AppComponent {
-
     // Factory to create instances of the AppComponent
     // @BindsInstance tells Dagger that it needs to add that instance in the graph and whenever Context is required, provide that instance.
     @Component.Factory
@@ -46,24 +45,8 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-
     // Types that can be retrieved from the graph
     fun registrationComponent(): RegistrationComponent.Factory
     fun loginComponent(): LoginComponent.Factory
-
-    // Classes that can be injected by this Component
-    // With the inject(activity: RegistrationActivity)method in the @Component interface,
-    // we're telling Dagger that RegistrationActivity requests injection and that it has to provide
-    // the dependencies which are annotated with @Inject to RegistrationViewModel.
-    //fun inject(activity: RegistrationActivity)
-    //fun inject(activity: MainActivity)
-
-   /* //Which fields do we want Dagger to provide?
-    // In EnterDetailsFragment,
-    // we want Dagger to populate both ViewModels.
-    // We do that by annotating the fields with
-    // @Inject and removing the private visibility modifier.
-    fun inject(fragment: EnterDetailsFragment)
-    fun inject(fragment: TermsAndConditionsFragment)*/
-   fun userManager(): UserManager
+    fun userManager(): UserManager
 }
