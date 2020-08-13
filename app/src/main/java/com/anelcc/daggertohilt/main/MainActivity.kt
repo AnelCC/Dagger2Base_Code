@@ -11,10 +11,20 @@ import com.anelcc.daggertohilt.login.LoginActivity
 import com.anelcc.daggertohilt.registration.RegistrationActivity
 import com.anelcc.daggertohilt.settings.SettingsActivity
 import com.anelcc.daggertohilt.user.UserManager
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
+    @InstallIn(ApplicationComponent::class)
+    @EntryPoint
+    interface UserManagerEntryPoint {
+        fun userManager(): UserManager
+    }
+
     // @Inject annotated fields will be provided by Dagger
     @Inject
     lateinit var mainViewModel: MainViewModel
@@ -26,9 +36,11 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
+        val userManager = entryPoint.userManager()
 
         // Grabs instance of UserManager from the application graph
-        val userManager = (application as MyApplication).appComponent.userManager()
+       // val userManager = (application as MyApplication).appComponent.userManager()
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
                 startActivity(Intent(this, RegistrationActivity::class.java))

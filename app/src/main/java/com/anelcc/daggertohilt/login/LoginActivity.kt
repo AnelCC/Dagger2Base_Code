@@ -13,9 +13,24 @@ import com.anelcc.daggertohilt.main.MainActivity
 import com.anelcc.daggertohilt.MyApplication
 import com.anelcc.daggertohilt.R
 import com.anelcc.daggertohilt.registration.RegistrationActivity
+import com.anelcc.daggertohilt.registration.RegistrationComponent
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
+    //If you want a content provider to use Hilt to get some dependencies,
+    // you need to define an interface that is annotated with @EntryPoint
+    // for each binding type that you want and include qualifiers.
+    // By using entry points you can keep the app working while migrating every Dagger component.
+    @InstallIn(ApplicationComponent::class)
+    @EntryPoint
+    interface LoginEntryPoint {
+        fun loginComponent(): RegistrationComponent.Factory
+    }
+
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
@@ -31,6 +46,9 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, LoginEntryPoint::class.java)
+        entryPoint.loginComponent().create().inject(this)
 
         loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
             when (state) {
